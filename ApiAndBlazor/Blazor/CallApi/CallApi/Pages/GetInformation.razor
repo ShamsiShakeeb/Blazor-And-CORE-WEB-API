@@ -1,0 +1,25 @@
+﻿@page "/getinformation"
+@using System.Net.Http
+@inject Data.IGetInformation info
+
+<h3>GetInformation</h3>
+
+@foreach (var item in data)
+{
+    <p> @item.Name </p>
+}
+
+
+@code {
+
+    List<Data.MInformation> data = new List<Data.MInformation>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        ////Install-Package Microsoft.AspNetCore.Blazor.HttpClient -Version 3.2.0-preview3.20168.3
+
+        data = await info.GetInfo();
+        await base.OnInitializedAsync();
+
+    }
+}
